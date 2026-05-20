@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+.next/
+out/
+target/
+*.tsbuildinfo
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env files (keep .env.example if any)
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Playwright / Browser MCP
+.playwright-mcp/
+
+# Java
+*.class
+*.jar
+!gradle-wrapper.jar
+
+# Maven
+.mvn/wrapper/maven-wrapper.jar
+
+# Music files (upload separately)
+音乐播放器/
+
+# Misc
+*.swp
+*.swo
+*~

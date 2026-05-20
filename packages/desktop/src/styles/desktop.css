@@ -1,0 +1,398 @@
+@import 'tailwindcss';
+
+.desktop-root,
+.award-root {
+  --award25-bg: #f0f2f5;
+  --award25-text: #0f1419;
+  --award25-text-dim: #888;
+  --award25-line: #0a0f1a;
+  --award25-line-dim: #ccc;
+  --award25-dim: #d5d9df;
+  --award25-brand: #f09199;
+  --award25-brand-dim: rgba(240, 145, 153, 0.15);
+  --award25-shadow: 8px 8px 0 rgba(0, 0, 0, 0.05);
+  --award25-win-bg: rgba(255, 255, 255, 0.98);
+  --taskbar-height: 64px;
+  --taskbar-total-height: calc(var(--taskbar-height) + env(safe-area-inset-bottom, 0px));
+  --c-anime: #f09199;
+  --c-game: #3498db;
+  --c-book: #ffb11b;
+  --c-music: #2ecc71;
+  --c-real: #9b59b6;
+  --c-link: #3498db;
+}
+
+/* USER icon — black, matching reference icon-personal */
+.desktop-icon.icon-user .icon-img {
+  background: var(--award25-line, #0a0f1a);
+  color: #fff;
+  border-color: var(--award25-line, #0a0f1a);
+}
+
+/* CONSOLE icon — pink accent */
+.desktop-icon.icon-console .icon-img {
+  color: var(--c-anime, #f09199);
+  border-color: var(--c-anime, #f09199);
+  font-size: 18px;
+  letter-spacing: -0.05em;
+}
+
+/* LINK icon — blue accent */
+.desktop-icon.icon-link .icon-img {
+  color: var(--c-link, #3498db);
+  border-color: var(--c-link, #3498db);
+}
+
+/* Console window — pink accent, glass body (see glass overrides below for active state) */
+#win-console .win-content {
+  background: transparent;
+}
+#win-console .win-btn:active { background: #f09199; color: #2c1218; }
+
+/* User / Anime old accent — now handled by glass overrides below */
+
+/* ========== Glass Morphism — matching music player aesthetic ========== */
+
+/* Global window styles (non-active) — visible glass even when unfocused */
+.window {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), 0 1px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: fixed;
+  transform: translateZ(0);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s, border-color 0.2s, border-radius 0.5s ease,
+              transform 0.3s ease, opacity 0.28s ease;
+}
+
+/* Active/focused window — more opaque + glow */
+.window.active-win {
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.15),
+              0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+}
+
+/* Minimizing animation — shrink + fade out */
+.window.minimizing {
+  transform: translateZ(0) scale(0.75) !important;
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+/* Restoring animation — start small then transition to normal */
+.window.restoring {
+  transform: translateZ(0) scale(0.75);
+  opacity: 0;
+}
+
+/* Hidden window — minimized and animation complete, stays in DOM for restore */
+.window.hidden-win {
+  opacity: 0 !important;
+  transform: translateZ(0) scale(0.75) !important;
+  pointer-events: none !important;
+  transition: none !important;
+}
+
+/* Maximized window — CSS !important overrides inline styles (matches bangumi-award-2025) */
+.window.maximized {
+  width: 100% !important;
+  height: calc(100% - var(--taskbar-total-height, 64px)) !important;
+  top: 0 !important;
+  left: 0 !important;
+  transform: none !important;
+  border-radius: 0;
+  border: none;
+}
+
+/* Window header — glass bar */
+.win-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  cursor: move;
+  user-select: none;
+  background: rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+.win-title {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+/* Window control buttons */
+.win-controls {
+  display: flex;
+  gap: 6px;
+}
+.win-btn {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.6);
+  transition: background 0.15s, color 0.15s;
+  line-height: 1;
+}
+.win-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.9);
+}
+.win-btn.close-btn:hover {
+  background: rgba(255, 80, 80, 0.7);
+  color: #fff;
+}
+
+/* Window content area */
+.win-content {
+  flex: 1;
+  overflow: auto;
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* Resize handle — subtle corner triangle */
+.resize-handle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 16px;
+  height: 16px;
+  cursor: nwse-resize;
+  background: linear-gradient(135deg, transparent 60%, rgba(255, 255, 255, 0.15) 60%);
+  border-bottom-right-radius: 12px;
+}
+
+/* ========== Console window — CMD black theme ========== */
+#win-console {
+  background: #0c0c0c !important;
+  border: 1px solid #333 !important;
+  font-family: 'Consolas', 'Courier New', monospace;
+}
+#win-console .win-header {
+  background: #1a1a1a;
+  border-bottom: 1px solid #333;
+}
+#win-console .win-title { color: #aaa; }
+#win-console .win-btn {
+  background: transparent;
+  color: #888;
+}
+#win-console .win-btn:hover { background: #333; color: #ddd; }
+#win-console .win-btn.close-btn:hover { background: #c0392b; color: #fff; }
+#win-console .win-content {
+  background: #0c0c0c;
+  color: #ccc;
+  padding: 0;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  overflow: hidden;
+}
+#win-console.active-win {
+  border-color: #555 !important;
+}
+#win-console.active-win .win-header {
+  background: #1e1e1e;
+  border-bottom-color: #444;
+}
+#win-console .resize-handle {
+  background: linear-gradient(135deg, transparent 60%, #444 60%);
+}
+
+/* Console output area — fills space, input pinned to bottom */
+.console-output {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.console-line.is-banner { color: #0ff; }
+.console-line.is-error   { color: #f44; }
+.console-line.is-success { color: #0f0; }
+.console-line.is-muted   { color: #888; }
+.console-line.is-info    { color: #ff0; }
+.console-line.is-input   { color: #fff; }
+
+/* Console input row — pinned to bottom */
+.console-input-row {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  background: #111;
+  border-top: 1px solid #333;
+  flex-shrink: 0;
+}
+.cli-prompt {
+  color: #0f0;
+  font-size: 13px;
+  white-space: nowrap;
+  user-select: none;
+}
+.console-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #ccc;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 13px;
+  outline: none;
+  padding: 0 0 0 6px;
+  caret-color: #fff;
+}
+.console-complete-btn {
+  background: #222;
+  border: 1px solid #444;
+  color: #888;
+  font-size: 11px;
+  padding: 2px 8px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+.console-complete-btn:hover {
+  background: #333;
+  color: #ddd;
+}
+
+/* User window — subtle black accent */
+#win-user.active-win { border-color: rgba(255, 255, 255, 0.3); }
+#win-user .win-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Anime iframe window */
+#win-anime.active-win { border-color: rgba(240, 145, 153, 0.5); }
+#win-anime .win-header {
+  border-bottom-color: rgba(240, 145, 153, 0.35);
+}
+#win-anime .win-content {
+  padding: 0;
+}
+
+/* Link iframe window */
+#win-link.active-win { border-color: rgba(52, 152, 219, 0.5); }
+#win-link .win-header {
+  border-bottom-color: rgba(52, 152, 219, 0.35);
+}
+#win-link .win-content {
+  padding: 0;
+}
+
+/* ========== Boot overlay ========== */
+.award-boot-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0f14;
+}
+
+/* ========== Taskbar glass morphism ========== */
+.taskbar {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.2) !important;
+  transform: translateZ(0);
+}
+.start-btn {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.85);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background 0.2s;
+}
+.start-btn:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+}
+.task-item {
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.04);
+  transition: background 0.15s, color 0.15s;
+}
+.task-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.85);
+}
+.task-item.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+}
+.sys-tray {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+}
+
+/* ========== Background layer — override for music player iframe ========== */
+.desktop-obj-bg {
+  position: fixed !important;
+  inset: 0 !important;
+  pointer-events: auto !important;
+  opacity: 1 !important;
+}
+.desktop-obj-bg iframe {
+  pointer-events: auto;
+}
+
+/* ========== Desktop icons — horizontal row + hover float ========== */
+.desktop {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 3vh;
+  position: fixed;
+  bottom: calc(var(--taskbar-total-height, 64px) + 3vh);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+.desktop-icon {
+  pointer-events: auto;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              filter 0.25s ease;
+  cursor: pointer;
+}
+.desktop-icon:hover {
+  transform: translateY(-8px);
+  filter: brightness(1.15);
+}
+.desktop-icon .icon-label {
+  transition: color 0.25s ease;
+}
+
+/* ========== Swipe-up enter animation ========== */
+@keyframes swipeBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes shimmerGreen {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}

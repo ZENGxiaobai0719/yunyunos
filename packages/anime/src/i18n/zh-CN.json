@@ -1,0 +1,100 @@
+{
+  "common": {
+    "loading": "加载中...",
+    "more": "更多",
+    "play": "播放",
+    "share": "分享",
+    "sort": "排序",
+    "collapse": "收起",
+    "expand": "展开",
+    "delete": "删除",
+    "all": "全部",
+    "finished": "已完结",
+    "firstPage": "首页",
+    "prevPage": "上一页",
+    "nextPage": "下一页",
+    "lastPage": "尾页",
+    "episode": "第{0}集",
+    "linkCopied": "链接已复制到剪贴板",
+    "back": "返回",
+    "backToTop": "回到顶部"
+  },
+  "nav": {
+    "home": "首页",
+    "tv": "TV番组",
+    "movie": "剧场番组",
+    "ranking": "排行版",
+    "search": "搜索",
+    "history": "播放记录"
+  },
+  "home": {
+    "newEpisode": "新番就要追着看"
+  },
+  "week": {
+    "monday": "周一",
+    "tuesday": "周二",
+    "wednesday": "周三",
+    "thursday": "周四",
+    "friday": "周五",
+    "saturday": "周六",
+    "sunday": "周日"
+  },
+  "show": {
+    "channel": "频道",
+    "type": "类型",
+    "year": "年份",
+    "resetFilters": "重置筛选条件",
+    "sortByLatest": "按最新",
+    "sortByHot": "按最热",
+    "sortByRating": "按评分",
+    "totalResults": "共 {0} 个结果"
+  },
+  "search": {
+    "placeholder": "搜索精彩内容",
+    "search": "搜索",
+    "searching": "搜索中...",
+    "resultInfo": "共 {0} 条结果，当前第 {1}/{2} 页",
+    "noResults": "暂无搜索结果，换个关键词试试吧",
+    "history": "搜索历史",
+    "noHistory": "暂无搜索记录",
+    "hotKeywords": "热门搜索"
+  },
+  "detail": {
+    "synopsis": "简介",
+    "episodeList": "资源列表（共 {0} 集）",
+    "notFound": "番剧不存在"
+  },
+  "play": {
+    "noVideoSource": "暂无视频源",
+    "nextEpisode": "下集",
+    "episodeList": "选集（共 {0} 集）",
+    "related": "相关作品"
+  },
+  "ranking": {
+    "week": "周榜",
+    "weekSub": "本周最热",
+    "month": "月榜",
+    "monthSub": "本月最热",
+    "total": "总榜",
+    "totalSub": "历史最热"
+  },
+  "history": {
+    "local": "本地记录",
+    "cloud": "云端记录",
+    "empty": "暂无播放记录",
+    "clear": "清空记录"
+  },
+  "notFound": {
+    "message": "页面不存在",
+    "goHome": "返回首页"
+  },
+  "footer": {
+    "bestExperience": "最佳体验，尽在Yunyun客户端",
+    "download": "前往下载"
+  },
+  "toolbar": {
+    "theme": "主题",
+    "locale": "繁简",
+    "backToTop": "顶部"
+  }
+}

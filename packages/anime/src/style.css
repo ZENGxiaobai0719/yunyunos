@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+/* ===== AniChart-exact RGB color variables ===== */
+:root {
+  --color-background: 237,241,245;
+  --color-foreground: 250,252,252;
+  --color-foreground-blue: 239,247,251;
+  --color-text: 92,114,138;
+  --color-text-light: 110,133,158;
+  --color-text-bright: 237,241,245;
+  --color-text-lighter: 164,178,194;
+  --color-blue: 61,180,242;
+  --color-blue-dark: 46,132,181;
+  --color-red: 232,93,117;
+  --color-green: 93,193,47;
+  --color-yellow: 219,182,64;
+  --color-orange: 230,163,73;
+  --color-purple: 152,109,234;
+  --color-shadow: 49,54,68;
+  --color-nav: 43,45,66;
+  --color-nav-link: 188,190,220;
+  --color-nav-link-hover: 211,213,243;
+  --color-chart-label: 153,158,199;
+}
+
+html {
+  font-size: 12px;
+}
+
+body {
+  margin: 0;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-text));
+  font-family: Overpass, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: rgb(var(--color-blue)); text-decoration: none; }
+a:hover { color: rgb(var(--color-blue-dark)); }
+
+.slide-right-enter-active, .slide-right-leave-active {
+  transition: transform 0.3s ease;
+}
+.slide-right-enter-from, .slide-right-leave-to {
+  transform: translateX(100%);
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}

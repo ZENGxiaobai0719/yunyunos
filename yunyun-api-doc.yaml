@@ -1,0 +1,904 @@
+openapi: "3.0.3"
+info:
+  title: "Yunyun动漫 API"
+  version: "1.0.0"
+  description: |
+    动漫番剧展示网站后端接口
+
+    **基础URL:** http://localhost:8080
+    **统一响应格式:** { code: 0, message: "ok", data: ... }
+
+    code 说明:
+    - 0: 成功
+    - 400: 参数错误
+    - 404: 资源不存在
+    - 500: 业务异常 / 服务器错误
+
+servers:
+  - url: http://localhost:8080
+    description: 本地开发环境
+
+tags:
+  - name: 番剧管理
+  - name: 搜索管理
+  - name: 排行版
+
+paths:
+  # ============================================================
+  # 番剧列表
+  # ============================================================
+  /api/anime:
+    get:
+      tags: [番剧管理]
+      summary: 分页获取番剧列表
+      description: 支持按类型、状态、年份、标签筛选，支持多字段排序。首页各分区、分类列表页、播放页相关推荐都调用此接口。
+      operationId: listAnime
+      parameters:
+        - name: page
+          in: query
+          description: 页码，从1开始
+          required: false
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+          example: 1
+        - name: pageSize
+          in: query
+          description: 每页条数，最大100
+          required: false
+          schema:
+            type: integer
+            default: 20
+            minimum: 1
+            maximum: 100
+          example: 20
+        - name: status
+          in: query
+          description: 番剧状态筛选
+          required: false
+          schema:
+            type: string
+            enum: [ongoing, completed]
+          example: ongoing
+        - name: type
+          in: query
+          description: 番剧类型筛选
+          required: false
+          schema:
+            type: string
+            enum: [TV番组, 剧场版, OVA]
+          example: TV番组
+        - name: year
+          in: query
+          description: 播出年份筛选
+          required: false
+          schema:
+            type: integer
+          example: 2026
+        - name: tags
+          in: query
+          description: 标签模糊筛选，如"恋爱"可匹配到 tags="恋爱,日常,轻小说改"的番剧
+          required: false
+          schema:
+            type: string
+          example: 恋爱
+        - name: orderBy
+          in: query
+          description: 排序字段
+          required: false
+          schema:
+            type: string
+            enum: [createdAt, views, rating]
+            default: createdAt
+          example: views
+      responses:
+        "200":
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnimePageResult"
+              examples:
+                homeTV:
+                  summary: 首页 TV番组分区（14条）
+                  value:
+                    code: 0
+                    message: ok
+                    data:
+                      list:
+                        - id: 1
+                          title: "关于邻家的天使大人不知不觉把我惯成了废人这档子事 第二季"
+                          type: "TV番组"
+                          status: "ongoing"
+                          latestEpisode: "06"
+                          airTime: "周五21:35后"
+                          views: 110626
+                          coverUrl: "https://img.animerce.com/cover/001.jpg"
+                          year: 2026
+                          season: "2026春"
+                          rating: 8.5
+                        - id: 2
+                          title: "没有辣妹会对阿宅温柔!?"
+                          type: "TV番组"
+                          status: "ongoing"
+                          latestEpisode: "06"
+                          airTime: "周三晚更新"
+                          views: 62864
+                          coverUrl: "https://img.animerce.com/cover/002.jpg"
+                          year: 2026
+                          season: "2026春"
+                          rating: 7.8
+                      total: 12
+                      page: 1
+                      pageSize: 14
+                showList:
+                  summary: 分类列表页（48条/页 + 标签筛选）
+                  value:
+                    code: 0
+                    message: ok
+                    data:
+                      list:
+                        - id: 1
+                          title: "关于邻家的天使大人不知不觉把我惯成了废人这档子事 第二季"
+                          type: "TV番组"
+                          status: "ongoing"
+                          latestEpisode: "06"
+                          airTime: "周五21:35后"
+                          views: 110626
+                          coverUrl: "https://img.animerce.com/cover/001.jpg"
+                          year: 2026
+                          season: "2026春"
+                          rating: 8.5
+                      total: 12
+                      page: 1
+                      pageSize: 48
+
+  # ============================================================
+  # 首页轮播
+  # ============================================================
+  /api/anime/carousel:
+    get:
+      tags: [番剧管理]
+      summary: 获取首页轮播推荐
+      description: 返回7条正在连载的热门番剧，按播放量倒序排列，用于首页顶部轮播展示。每条包含横幅大图、标题、类型、简介、播放量等。
+      operationId: carouselAnime
+      parameters: []
+      responses:
+        "200":
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CarouselResult"
+              examples:
+                success:
+                  summary: 轮播数据（7条）
+                  value:
+                    code: 0
+                    message: ok
+                    data:
+                      list:
+                        - id: 3
+                          title: "Re:从零开始的异世界生活 第四季 丧失篇"
+                          bannerUrl: "https://img.animerce.com/banner/003.jpg"
+                          description: "在水门都市朴利斯提拉的死战中，昴等人虽然勉强取得胜利，但付出的代价却过于沉重。"
+                          type: "TV番组"
+                          latestEpisode: "06"
+                          airTime: "周三21:35后"
+                          views: 201251
+                          rating: 9.2
+                        - id: 6
+                          title: "关于我转生变成史莱姆这档事 第四季"
+                          bannerUrl: "https://img.animerce.com/banner/006.jpg"
+                          description: "魔国联邦「坦派斯特」朝着实现人魔共荣圈迈出了步伐。"
+                          type: "TV番组"
+                          latestEpisode: "05"
+                          airTime: "周五23:05后"
+                          views: 170422
+                          rating: 8.4
+
+  # ============================================================
+  # 番剧详情
+  # ============================================================
+  /api/anime/{id}:
+    get:
+      tags: [番剧管理]
+      summary: 获取番剧详情
+      description: 根据番剧ID获取完整信息，包含所有字段和分集列表（按集数正序排列）。详情页和播放页都调用此接口。
+      operationId: detailAnime
+      parameters:
+        - name: id
+          in: path
+          description: 番剧ID
+          required: true
+          schema:
+            type: integer
+          example: 1
+      responses:
+        "200":
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnimeDetailResult"
+              examples:
+                success:
+                  summary: 番剧详情 + 分集列表
+                  value:
+                    code: 0
+                    message: ok
+                    data:
+                      id: 1
+                      title: "关于邻家的天使大人不知不觉把我惯成了废人这档子事 第二季"
+                      altTitle: "お隣の天使様にいつの間にか駄目人間にされていた件 2期"
+                      description: "因成为了公寓邻居而开始交流的藤宫周与椎名真昼，在高中二年级的运动会结束后，终于正式交往。无论是亲手制作的料理还是浴衣约会，两人间充满了如新婚夫妻般的氛围，但那份怦然心动的感觉却依然让他们不知所措。随着关系的改变，周围的人也渐渐注意到两人的变化，新的故事就此展开。"
+                      coverUrl: "https://img.animerce.com/cover/001.jpg"
+                      bannerUrl: "https://img.animerce.com/banner/001.jpg"
+                      type: "TV番组"
+                      status: "ongoing"
+                      episodeCount: 12
+                      latestEpisode: "06"
+                      airTime: "周五21:35后"
+                      views: 110626
+                      rating: 8.5
+                      year: 2026
+                      season: "2026春"
+                      tags: "恋爱,日常,轻小说改"
+                      episodes:
+                        - number: 1
+                          title: "第一话 新的开始"
+                          url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+                        - number: 2
+                          title: "第二话 邻家的早餐"
+                          url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+                        - number: 3
+                          title: "第三话 第一次约会"
+                          url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+        "404":
+          description: 番剧不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResult"
+              example:
+                code: 404
+                message: "番剧不存在"
+                data: null
+
+  # ============================================================
+  # 搜索
+  # ============================================================
+  /api/search:
+    get:
+      tags: [搜索管理]
+      summary: 关键字搜索番剧
+      description: |
+        对番剧标题进行模糊搜索，支持分页。
+        每次搜索会异步记录到搜索历史表，用于热门搜索词统计。
+      operationId: searchAnime
+      parameters:
+        - name: q
+          in: query
+          description: 搜索关键词（对标题做 LIKE 模糊匹配）
+          required: true
+          schema:
+            type: string
+            minLength: 1
+          example: "天使"
+        - name: page
+          in: query
+          description: 页码
+          required: false
+          schema:
+            type: integer
+            default: 1
+          example: 1
+        - name: pageSize
+          in: query
+          description: 每页条数
+          required: false
+          schema:
+            type: integer
+            default: 20
+          example: 20
+      responses:
+        "200":
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchPageResult"
+              examples:
+                success:
+                  summary: 搜索"天使"
+                  value:
+                    code: 0
+                    message: ok
+                    data:
+                      list:
+                        - id: 1
+                          title: "关于邻家的天使大人不知不觉把我惯成了废人这档子事 第二季"
+                          type: "TV番组"
+                          coverUrl: "https://img.animerce.com/cover/001.jpg"
+                      total: 2
+                      page: 1
+                      pageSize: 20
+                empty:
+                  summary: 无结果
+                  value:
+                    code: 0
+                    message: ok
+                    data:
+                      list: []
+                      total: 0
+                      page: 1
+                      pageSize: 20
+        "400":
+          description: 缺少关键词
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResult"
+              example:
+                code: 400
+                message: "关键词不能为空"
+                data: null
+
+  # ============================================================
+  # 热门搜索词
+  # ============================================================
+  /api/search/hot:
+    get:
+      tags: [搜索管理]
+      summary: 获取热门搜索词
+      description: 从搜索历史表中按搜索频次聚合，返回Top10热门搜索词。用于搜索侧边栏展示。
+      operationId: hotSearchKeywords
+      parameters: []
+      responses:
+        "200":
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HotKeywordsResult"
+              examples:
+                success:
+                  summary: 热门搜索词 Top10
+                  value:
+                    code: 0
+                    message: ok
+                    data:
+                      - "天使"
+                      - "史莱姆"
+                      - "异世界"
+                      - "你的名字"
+                      - "邻家的天使"
+                      - "迷宫饭"
+                      - "葬送的芙莉莲"
+                      - "百合"
+                      - "2026新番"
+                      - "勇者"
+
+  # ============================================================
+  # 清空搜索历史
+  # ============================================================
+  /api/search/history:
+    delete:
+      tags: [搜索管理]
+      summary: 清空搜索历史
+      description: 删除 search_history 表中的所有记录。
+      operationId: clearSearchHistory
+      parameters: []
+      responses:
+        "200":
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmptyResult"
+              example:
+                code: 0
+                message: ok
+                data: null
+
+  # ============================================================
+  # 排行版
+  # ============================================================
+  /api/ranking:
+    get:
+      tags: [排行版]
+      summary: 获取排行版数据
+      description: |
+        按类型获取排行版数据，返回周榜、月榜、总榜三列。
+        Phase1 三榜使用同一数据源（按总播放量views排序），Phase2 将区分 weekly_views/monthly_views。
+      operationId: getRanking
+      parameters:
+        - name: type
+          in: query
+          description: 番剧类型
+          required: false
+          schema:
+            type: string
+            enum: [TV番组, 剧场版]
+            default: TV番组
+          example: TV番组
+      responses:
+        "200":
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RankingResult"
+              examples:
+                tvRanking:
+                  summary: TV番组排行版
+                  value:
+                    code: 0
+                    message: ok
+                    data:
+                      weekList:
+                        - id: 3
+                          title: "Re:从零开始的异世界生活 第四季 丧失篇"
+                          coverUrl: "https://img.animerce.com/cover/003.jpg"
+                          views: 201251
+                          rating: 9.2
+                          rank: 1
+                        - id: 6
+                          title: "关于我转生变成史莱姆这档事 第四季"
+                          coverUrl: "https://img.animerce.com/cover/006.jpg"
+                          views: 170422
+                          rating: 8.4
+                          rank: 2
+                      monthList:
+                        - id: 3
+                          title: "Re:从零开始的异世界生活 第四季 丧失篇"
+                          coverUrl: "https://img.animerce.com/cover/003.jpg"
+                          views: 201251
+                          rating: 9.2
+                          rank: 1
+                        - id: 6
+                          title: "关于我转生变成史莱姆这档事 第四季"
+                          coverUrl: "https://img.animerce.com/cover/006.jpg"
+                          views: 170422
+                          rating: 8.4
+                          rank: 2
+                      totalList:
+                        - id: 11
+                          title: "你的名字。"
+                          coverUrl: "https://img.animerce.com/cover/011.jpg"
+                          views: 520000
+                          rating: 9.8
+                          rank: 1
+                        - id: 9
+                          title: "葬送的芙莉莲"
+                          coverUrl: "https://img.animerce.com/cover/009.jpg"
+                          views: 389500
+                          rating: 9.5
+                          rank: 2
+                movieRanking:
+                  summary: 剧场版排行版
+                  value:
+                    code: 0
+                    message: ok
+                    data:
+                      weekList:
+                        - id: 11
+                          title: "你的名字。"
+                          coverUrl: "https://img.animerce.com/cover/011.jpg"
+                          views: 520000
+                          rating: 9.8
+                          rank: 1
+                        - id: 12
+                          title: "天气之子"
+                          coverUrl: "https://img.animerce.com/cover/012.jpg"
+                          views: 380000
+                          rating: 9.0
+                          rank: 2
+                      monthList:
+                        - id: 11
+                          title: "你的名字。"
+                          coverUrl: "https://img.animerce.com/cover/011.jpg"
+                          views: 520000
+                          rating: 9.8
+                          rank: 1
+                        - id: 12
+                          title: "天气之子"
+                          coverUrl: "https://img.animerce.com/cover/012.jpg"
+                          views: 380000
+                          rating: 9.0
+                          rank: 2
+                      totalList:
+                        - id: 11
+                          title: "你的名字。"
+                          coverUrl: "https://img.animerce.com/cover/011.jpg"
+                          views: 520000
+                          rating: 9.8
+                          rank: 1
+                        - id: 12
+                          title: "天气之子"
+                          coverUrl: "https://img.animerce.com/cover/012.jpg"
+                          views: 380000
+                          rating: 9.0
+                          rank: 2
+
+# ============================================================
+# 数据模型定义
+# ============================================================
+components:
+  schemas:
+    # ---- 通用 ----
+    EmptyResult:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 0
+        message:
+          type: string
+          example: ok
+        data:
+          nullable: true
+          example: null
+
+    ErrorResult:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 404
+        message:
+          type: string
+          example: "番剧不存在"
+        data:
+          nullable: true
+          example: null
+
+    # ---- 分页包装 ----
+    AnimePageResult:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 0
+        message:
+          type: string
+          example: ok
+        data:
+          $ref: "#/components/schemas/PageDataAnime"
+
+    SearchPageResult:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 0
+        message:
+          type: string
+          example: ok
+        data:
+          $ref: "#/components/schemas/PageDataSearch"
+
+    PageDataAnime:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/AnimeItem"
+        total:
+          type: integer
+          example: 12
+        page:
+          type: integer
+          example: 1
+        pageSize:
+          type: integer
+          example: 20
+
+    PageDataSearch:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/SearchResultItem"
+        total:
+          type: integer
+          example: 2
+        page:
+          type: integer
+          example: 1
+        pageSize:
+          type: integer
+          example: 20
+
+    # ---- 番剧列表项 ----
+    AnimeItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: 番剧ID
+          example: 1
+        title:
+          type: string
+          description: 标题
+          example: "关于邻家的天使大人不知不觉把我惯成了废人这档子事 第二季"
+        type:
+          type: string
+          description: 类型
+          enum: [TV番组, 剧场版, OVA]
+          example: "TV番组"
+        status:
+          type: string
+          description: 连载状态
+          enum: [ongoing, completed]
+          example: "ongoing"
+        latestEpisode:
+          type: string
+          description: 最新话数
+          example: "06"
+        airTime:
+          type: string
+          description: 播出时间描述
+          example: "周五21:35后"
+        views:
+          type: integer
+          description: 总播放量
+          example: 110626
+        coverUrl:
+          type: string
+          description: 封面图URL
+          example: "https://img.animerce.com/cover/001.jpg"
+        year:
+          type: integer
+          description: 播出年份
+          example: 2026
+        season:
+          type: string
+          description: 播出季度
+          example: "2026春"
+        rating:
+          type: number
+          description: 评分(1-10)
+          example: 8.5
+
+    # ---- 轮播 ----
+    CarouselResult:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 0
+        message:
+          type: string
+          example: ok
+        data:
+          type: object
+          properties:
+            list:
+              type: array
+              items:
+                $ref: "#/components/schemas/CarouselItem"
+
+    CarouselItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "关于邻家的天使大人不知不觉把我惯成了废人这档子事 第二季"
+        bannerUrl:
+          type: string
+          description: 横幅大图URL
+          example: "https://img.animerce.com/banner/001.jpg"
+        description:
+          type: string
+          description: 简介
+        type:
+          type: string
+          example: "TV番组"
+        latestEpisode:
+          type: string
+          example: "06"
+        airTime:
+          type: string
+          example: "周五21:35后"
+        views:
+          type: integer
+          example: 110626
+        rating:
+          type: number
+          example: 8.5
+
+    # ---- 番剧详情 ----
+    AnimeDetailResult:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 0
+        message:
+          type: string
+          example: ok
+        data:
+          $ref: "#/components/schemas/AnimeDetail"
+
+    AnimeDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "关于邻家的天使大人不知不觉把我惯成了废人这档子事 第二季"
+        altTitle:
+          type: string
+          nullable: true
+          description: 别名/日文名
+          example: "お隣の天使様にいつの間にか駄目人間にされていた件 2期"
+        description:
+          type: string
+          nullable: true
+          description: 完整简介
+        coverUrl:
+          type: string
+          nullable: true
+          example: "https://img.animerce.com/cover/001.jpg"
+        bannerUrl:
+          type: string
+          nullable: true
+          example: "https://img.animerce.com/banner/001.jpg"
+        type:
+          type: string
+          nullable: true
+          example: "TV番组"
+        status:
+          type: string
+          example: "ongoing"
+        episodeCount:
+          type: integer
+          nullable: true
+          example: 12
+        latestEpisode:
+          type: string
+          nullable: true
+          example: "06"
+        airTime:
+          type: string
+          nullable: true
+          example: "周五21:35后"
+        views:
+          type: integer
+          example: 110626
+        rating:
+          type: number
+          nullable: true
+          example: 8.5
+        year:
+          type: integer
+          nullable: true
+          example: 2026
+        season:
+          type: string
+          nullable: true
+          example: "2026春"
+        tags:
+          type: string
+          nullable: true
+          description: 逗号分隔的标签
+          example: "恋爱,日常,轻小说改"
+        episodes:
+          type: array
+          description: 分集列表，按集数正序排列
+          items:
+            $ref: "#/components/schemas/EpisodeItem"
+
+    EpisodeItem:
+      type: object
+      properties:
+        number:
+          type: integer
+          description: 第几话
+          example: 1
+        title:
+          type: string
+          nullable: true
+          description: 话标题
+          example: "第一话 新的开始"
+        url:
+          type: string
+          nullable: true
+          description: 视频播放地址(m3u8/mp4)
+          example: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+
+    # ---- 搜索结果 ----
+    SearchResultItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "关于邻家的天使大人不知不觉把我惯成了废人这档子事 第二季"
+        type:
+          type: string
+          example: "TV番组"
+        coverUrl:
+          type: string
+          example: "https://img.animerce.com/cover/001.jpg"
+
+    # ---- 热门搜索词 ----
+    HotKeywordsResult:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 0
+        message:
+          type: string
+          example: ok
+        data:
+          type: array
+          items:
+            type: string
+          example: ["天使", "史莱姆", "异世界"]
+
+    # ---- 排行版 ----
+    RankingResult:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 0
+        message:
+          type: string
+          example: ok
+        data:
+          type: object
+          properties:
+            weekList:
+              type: array
+              description: 周榜Top10
+              items:
+                $ref: "#/components/schemas/RankingItem"
+            monthList:
+              type: array
+              description: 月榜Top10
+              items:
+                $ref: "#/components/schemas/RankingItem"
+            totalList:
+              type: array
+              description: 总榜Top10
+              items:
+                $ref: "#/components/schemas/RankingItem"
+
+    RankingItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "关于邻家的天使大人不知不觉把我惯成了废人这档子事 第二季"
+        coverUrl:
+          type: string
+          example: "https://img.animerce.com/cover/001.jpg"
+        views:
+          type: integer
+          description: 播放量
+          example: 110626
+        rating:
+          type: number
+          nullable: true
+          example: 8.5
+        rank:
+          type: integer
+          description: 排名(1-10)
+          example: 1

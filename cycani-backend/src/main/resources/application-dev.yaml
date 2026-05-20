@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/yunyun?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useSSL=false
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+music:
+  storage-path: D:/2026/project/音乐播放器
+
+knife4j:
+  enable: true
+
+aria2:
+  exe-path: D:/2026/project/新建文件夹/aria2c.exe
+  download-dir: D:/2026/project/新建文件夹/downloads

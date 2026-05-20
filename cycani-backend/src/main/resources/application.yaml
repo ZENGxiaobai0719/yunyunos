@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+music:
+  storage-path: ./data/music
+
+bangumi:
+  api-base: https://api.bgm.tv
+  cdn-prefix: https://lain.bgm.tv
+
+mikan:
+  api-base: https://mikanani.me
+  proxy-host: 127.0.0.1
+  proxy-port: 7890
+
+aria2:
+  rpc-url: http://127.0.0.1:6800/jsonrpc
+  rpc-secret: ""
+  download-dir: ./downloads
+  exe-path: aria2c
+  poll-interval-ms: 2000
+  max-concurrent: 3

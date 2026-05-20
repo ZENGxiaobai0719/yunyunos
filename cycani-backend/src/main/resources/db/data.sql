@@ -1,0 +1,1 @@
+-- 种子数据已清空，通过 /api/anime/sync 从 AniList + anilist-chinese 同步

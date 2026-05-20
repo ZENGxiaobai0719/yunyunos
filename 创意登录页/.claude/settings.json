@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /dev/null -w \"WASM HTTP: %{http_code}\" \"http://localhost:5183/node_modules/@rive-app/canvas/rive.wasm\")",
+      "Bash(curl -s \"http://localhost:5183/@fs/c/Users/26463/Downloads/login-main/login-main/node_modules/@rive-app/canvas/rive.wasm\" -o /dev/null -w \"%{http_code}\")",
+      "Bash(grep -oP '.{0,200}locateFile.{0,200}' \"c:/Users/26463/Downloads/login-main/login-main/node_modules/@rive-app/canvas/rive.js\")",
+      "Bash(curl -s \"http://localhost:5183/node_modules/.vite/deps/@rive-app_canvas.js?v=XXXXXXXX\")",
+      "Bash(curl -s \"http://localhost:5183/@id/__x00__@rive-app/canvas\" -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -s \"http://localhost:5183/script.js\")",
+      "Bash(curl -s \"http://localhost:5183/node_modules/.vite/deps/@rive-app_canvas.js?v=5a60b732\")",
+      "Bash(rg -o '\\(\\\\.\\\\.?/[^\"]+\\\\.\\(?:wasm|riv\\)\\)' dist/assets/index-*.js)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"http://localhost:4173/riv/smallpeople.riv\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"http://localhost:4173/riv/eyes.riv\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"http://localhost:4173/assets/rive-BUBNNRcT.wasm\")",
+      "Bash(taskkill //F //IM node.exe)"
+    ]
+  }
+}

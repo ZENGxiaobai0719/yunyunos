@@ -1,0 +1,515 @@
+[
+  {
+    "title": {
+      "ja": "Remember",
+      "ko": "Remember"
+    },
+    "artist": {
+      "ja": "yuigot & 月見ヤチヨ",
+      "ko": "yuigot & 루나미 야치요"
+    },
+    "musicFile": "music/Remember.flac",
+    "coverImage": "cover/Remember.png",
+    "default": true,
+    "default_bg": 2,
+    "mv": "mv/Remember.webm",
+    "subtitle": {
+      "ja": "subtitle/Remember_ja.srt",
+      "ko": "subtitle/Remember_ko.srt"
+    }
+  },
+  {
+    "title": {
+      "ja": "星降る海",
+      "ko": "별이 내리는 바다"
+    },
+    "artist": {
+      "ja": "Aqu3ra & 月見ヤチヨ",
+      "ko": "Aqu3ra & 루나미 야치요"
+    },
+    "musicFile": "music/星降る海.flac",
+    "coverImage": "cover/星降る海.png",
+    "default": true,
+    "default_bg": 3,
+    "mv": "mv/星降る海.webm",
+    "subtitle": {
+      "ja": "subtitle/星降る海_ja.srt",
+      "ko": "subtitle/星降る海_ko.srt"
+    }
+  },
+  {
+    "title": {
+      "ja": "私は、わたしの事が好き。",
+      "ko": "나는 내가 좋아."
+    },
+    "artist": {
+      "ja": "Honeyworks & かぐや",
+      "ko": "Honeyworks & 카구야"
+    },
+    "musicFile": "music/私は、わたしの事が好き.flac",
+    "coverImage": "cover/私は、わたしの事が好き.png",
+    "default": true,
+    "default_bg": 4,
+    "mv": "mv/私は、わたしの事が好き.webm",
+    "subtitle": {
+      "ja": "subtitle/私は、わたしの事が好き_ja.srt",
+      "ko": "subtitle/私は、わたしの事が好き_ko.srt"
+    }
+  },
+  {
+    "title": {
+      "ja": "ハッピーシンセサイザ (COVER)",
+      "ko": "해피 신디사이저 (COVER)"
+    },
+    "artist": {
+      "ja": "yuigot & かぐや",
+      "ko": "yuigot & 카구야"
+    },
+    "musicFile": "music/ハッピーシンセサイザ.flac",
+    "coverImage": "cover/ハッピーシンセサイザ.png",
+    "default": true,
+    "default_bg": 5,
+    "mv": "mv/ハッピーシンセサイザ.webm",
+    "subtitle": {
+      "ja": "subtitle/ハッピーシンセサイザ_ja.srt",
+      "ko": "subtitle/ハッピーシンセサイザ_ko.srt"
+    }
+  },
+  {
+    "title": {
+      "ja": "ワールドイズマイン CPK! Remix",
+      "ko": "World is Mine CPK! Remix"
+    },
+    "artist": {
+      "ja": "ryo (supercell) & かぐや & 月見ヤチヨ",
+      "ko": "ryo (supercell) & 카구야 & 루나미 야치요"
+    },
+    "musicFile": "music/ワールドイズマイン.flac",
+    "coverImage": "cover/ワールドイズマイン.png",
+    "default": true,
+    "default_bg": 6,
+    "mv": "mv/ワールドイズマイン.webm",
+    "subtitle": {
+      "ja": "subtitle/ワールドイズマイン_ja.srt",
+      "ko": "subtitle/ワールドイズマイン_ko.srt"
+    }
+  },
+  {
+    "title": {
+      "ja": "Ex-Otogibanashi",
+      "ko": "Ex-Otogibanashi"
+    },
+    "artist": {
+      "ja": "ryo (supercell) & かぐや & 月見ヤチヨ",
+      "ko": "ryo (supercell) & 카구야 & 루나미 야치요"
+    },
+    "musicFile": "music/Ex-Otogibanashi.flac",
+    "coverImage": "cover/Ex-Otogibanashi.png",
+    "default": true,
+    "default_bg": 7,
+    "mv": "mv/Ex-Otogibanashi.webm",
+    "subtitle": {
+      "ja": "subtitle/Ex-Otogibanashi_ja.srt",
+      "ko": "subtitle/Ex-Otogibanashi_ko.srt"
+    }
+  },
+  {
+    "title": {
+      "ja": "瞬間、シンフォニー。",
+      "ko": "순간, 심포니."
+    },
+    "artist": {
+      "ja": "40mP & かぐや",
+      "ko": "40mP & 카구야"
+    },
+    "musicFile": "music/瞬間、シンフォニー.flac",
+    "coverImage": "cover/瞬間、シンフォニー.png",
+    "default": true,
+    "default_bg": 8,
+    "mv": "mv/瞬間、シンフォニー.webm",
+    "subtitle": {
+      "ja": "subtitle/瞬間、シンフォニー_ja.srt",
+      "ko": "subtitle/瞬間、シンフォニー_ko.srt"
+    }
+  },
+  {
+    "title": {
+      "ja": "Reply",
+      "ko": "Reply"
+    },
+    "artist": {
+      "ja": "kz & かぐや",
+      "ko": "kz & 카구야"
+    },
+    "musicFile": "music/Reply.flac",
+    "coverImage": "cover/Reply.png",
+    "default": true,
+    "default_bg": 9,
+    "mv": "mv/Reply.webm",
+    "subtitle": {
+      "ja": "subtitle/Reply_ja.srt",
+      "ko": "subtitle/Reply_ko.srt"
+    }
+  },
+  {
+    "title": {
+      "ja": "ray (CPK! Ver.)",
+      "ko": "ray (CPK! Ver.)"
+    },
+    "artist": {
+      "ja": "かぐや & 月見ヤチヨ",
+      "ko": "카구야 & 루나미 야치요"
+    },
+    "musicFile": "music/ray.flac",
+    "coverImage": "cover/ray.png",
+    "default": true,
+    "default_bg": 10,
+    "mv": "mv/ray.webm",
+    "subtitle": {
+      "ja": "subtitle/ray_ja.srt",
+      "ko": "subtitle/ray_ko.srt"
+    }
+  },
+  {
+    "title": {
+      "ja": "メルト CPK! Remix (かぐや ver.)",
+      "ko": "멜트 CPK! Remix (카구야 ver.)"
+    },
+    "artist": {
+      "ja": "ryo (supercell) & かぐや",
+      "ko": "ryo (supercell) & 카구야"
+    },
+    "musicFile": "music/melt.flac",
+    "coverImage": "cover/melt.png",
+    "default": true,
+    "default_bg": 11,
+    "mv": "mv/melt.webm",
+    "subtitle": {
+      "ja": "subtitle/melt_ja.srt",
+      "ko": "subtitle/melt_ko.srt"
+    }
+  },
+  {
+    "title": {
+      "ja": "Ex-Otogibanashi (月見ヤチヨ ver.)",
+      "ko": "Ex-Otogibanashi (야치요 ver.)"
+    },
+    "artist": {
+      "ja": "ryo (supercell) & 月見ヤチヨ",
+      "ko": "ryo (supercell) & 루나미 야치요"
+    },
+    "musicFile": "music/Ex-Otogibanashi_ya.mp3",
+    "coverImage": "cover/Ex-Otogibanashi.png",
+    "default": true,
+    "default_bg": 7,
+    "mv": "mv/Ex-Otogibanashi.webm",
+    "subtitle": {
+      "ja": "subtitle/Ex-Otogibanashi_ja.srt",
+      "ko": "subtitle/Ex-Otogibanashi_ko.srt"
+    }
+  },
+  {
+    "title": {
+      "ja": "ロンリーユニバース (COVER)",
+      "ko": "론리 유니버스 (COVER)"
+    },
+    "artist": {
+      "ja": "Aqu3ra & 月見ヤチヨ",
+      "ko": "Aqu3ra & 루나미 야치요"
+    },
+    "musicFile": "music/ロンリーユニバース.mp3",
+    "coverImage": "cover/ロンリーユニバース.png",
+    "default": true,
+    "default_bg": 12,
+    "mv": "mv/ロンリーユニバース.webm",
+    "subtitle": {
+      "ja": "subtitle/ロンリーユニバース_ja.srt",
+      "ko": "subtitle/ロンリーユニバース_ko.srt"
+    }
+  },
+  {
+    "title": {
+      "ja": "竹取オーバーナイトセンセーション (COVER)",
+      "ko": "타케토리 오버나이트 센세이션 (COVER)"
+    },
+    "artist": {
+      "ja": "Honeyworks & かぐや",
+      "ko": "Honeyworks & 카구야"
+    },
+    "musicFile": "music/竹取オーバーナイトセンセーション.mp3",
+    "coverImage": "cover/竹取オーバーナイトセンセーション.png",
+    "default": true,
+    "default_bg": 13,
+    "mv": "mv/竹取オーバーナイトセンセーション.webm",
+    "subtitle": {
+      "ja": "subtitle/竹取オーバーナイトセンセーション_ja.srt",
+      "ko": "subtitle/竹取オーバーナイトセンセーション_ko.srt"
+    }
+  },
+  {
+    "title": {
+      "ja": "トリノコシティ (COVER)",
+      "ko": "토리노코시티 (COVER)"
+    },
+    "artist": {
+      "ja": "40mp & 月見ヤチヨ",
+      "ko": "40mp & 루나미 야치요"
+    },
+    "musicFile": "music/トリノコシティ.mp3",
+    "coverImage": "cover/トリノコシティ.png",
+    "default": true,
+    "default_bg": 14,
+    "mv": "mv/トリノコシティ.webm",
+    "subtitle": {
+      "ja": "subtitle/トリノコシティ_ja.srt",
+      "ko": "subtitle/トリノコシティ_ko.srt"
+    }
+  },
+  {
+    "title": {
+      "ja": "夢をみる島 (COVER)",
+      "ko": "꿈꾸는 섬 (COVER)"
+    },
+    "artist": {
+      "ja": "yuigot & かぐや",
+      "ko": "yuigot & 카구야"
+    },
+    "musicFile": "music/夢をみる島.mp3",
+    "coverImage": "cover/夢をみる島.png",
+    "default": true,
+    "default_bg": 15,
+    "mv": "mv/夢をみる島.webm",
+    "subtitle": {
+      "ja": "subtitle/夢をみる島_ja.srt",
+      "ko": "subtitle/夢をみる島_ko.srt"
+    }
+  },
+  {
+    "title": {
+      "ja": "Tell Your World (COVER)",
+      "ko": "Tell Your World (COVER)"
+    },
+    "artist": {
+      "ja": "kz & 月見ヤチヨ",
+      "ko": "kz & 루나미 야치요"
+    },
+    "musicFile": "music/Tell Your World.mp3",
+    "coverImage": "cover/Tell Your World.png",
+    "default": true,
+    "default_bg": 16,
+    "mv": "mv/Tell Your World.webm",
+    "subtitle": {
+      "ja": "subtitle/Tell Your World_ja.srt",
+      "ko": "subtitle/Tell Your World_ko.srt"
+    }
+  },
+  {
+    "title": {
+      "ja": "TSUKUYOMI",
+      "ko": "TSUKUYOMI"
+    },
+    "artist": {
+      "ja": "コーニッシュ",
+      "ko": "코니시"
+    },
+    "musicFile": "music/TSUKUYOMI.mp3",
+    "coverImage": "cover/orig.jpg",
+    "default": false,
+    "default_bg": 17,
+    "mv": "",
+    "subtitle": {
+      "ja": "",
+      "ko": ""
+    }
+  },
+  {
+    "title": {
+      "ja": "OnyXXX",
+      "ko": "OnyXXX"
+    },
+    "artist": {
+      "ja": "コーニッシュ & Black onyX",
+      "ko": "코니시 & Black onyX"
+    },
+    "musicFile": "music/OnyXXX.mp3",
+    "coverImage": "cover/orig.jpg",
+    "default": false,
+    "default_bg": 17,
+    "mv": "",
+    "subtitle": {
+      "ja": "",
+      "ko": ""
+    }
+  },
+  {
+    "title": {
+      "ja": "IROHA meets KAGUyA",
+      "ko": "IROHA meets KAGUyA"
+    },
+    "artist": {
+      "ja": "コーニッシュ",
+      "ko": "코니시"
+    },
+    "musicFile": "music/IROHA meets KAGUyA.mp3",
+    "coverImage": "cover/orig.jpg",
+    "default": false,
+    "default_bg": 17,
+    "mv": "",
+    "subtitle": {
+      "ja": "",
+      "ko": ""
+    }
+  },
+  {
+    "title": {
+      "ja": "ヤチヨカップ優勝！",
+      "ko": "Yachiyo Cup Victory"
+    },
+    "artist": {
+      "ja": "コーニッシュ",
+      "ko": "코니시"
+    },
+    "musicFile": "music/ヤチヨカップ優勝！.mp3",
+    "coverImage": "cover/orig.jpg",
+    "default": false,
+    "default_bg": 17,
+    "mv": "",
+    "subtitle": {
+      "ja": "",
+      "ko": ""
+    }
+  },
+  {
+    "title": {
+      "ja": "零ゆる光彩",
+      "ko": "Gently Fading Radiance"
+    },
+    "artist": {
+      "ja": "コーニッシュ",
+      "ko": "코니시"
+    },
+    "musicFile": "music/零ゆる光彩.mp3",
+    "coverImage": "cover/orig.jpg",
+    "default": false,
+    "default_bg": 17,
+    "mv": "",
+    "subtitle": {
+      "ja": "",
+      "ko": ""
+    }
+  },
+  {
+    "title": {
+      "ja": "うつし世の姫",
+      "ko": "Mortal Princess"
+    },
+    "artist": {
+      "ja": "コーニッシュ",
+      "ko": "코니시"
+    },
+    "musicFile": "music/うつし世の姫.mp3",
+    "coverImage": "cover/orig.jpg",
+    "default": false,
+    "default_bg": 17,
+    "mv": "",
+    "subtitle": {
+      "ja": "",
+      "ko": ""
+    }
+  },
+  {
+    "title": {
+      "ja": "IROHA'S Dancing All Night",
+      "ko": "IROHA'S Dancing All Night"
+    },
+    "artist": {
+      "ja": "コーニッシュ",
+      "ko": "코니시"
+    },
+    "musicFile": "music/IROHA'S Dancing All Night.mp3",
+    "coverImage": "cover/orig.jpg",
+    "default": false,
+    "default_bg": 17,
+    "mv": "",
+    "subtitle": {
+      "ja": "",
+      "ko": ""
+    }
+  },
+  {
+    "title": {
+      "ja": "FUSHI",
+      "ko": "FUSHI"
+    },
+    "artist": {
+      "ja": "コーニッシュ",
+      "ko": "코니시"
+    },
+    "musicFile": "music/FUSHI.mp3",
+    "coverImage": "cover/orig.jpg",
+    "default": false,
+    "default_bg": 17,
+    "mv": "",
+    "subtitle": {
+      "ja": "",
+      "ko": ""
+    }
+  },
+  {
+    "title": {
+      "ja": "ヤチヨ絵巻",
+      "ko": "The Yachiyo Chronicle"
+    },
+    "artist": {
+      "ja": "コーニッシュ",
+      "ko": "코니시"
+    },
+    "musicFile": "music/ヤチヨ絵巻.mp3",
+    "coverImage": "cover/orig.jpg",
+    "default": false,
+    "default_bg": 17,
+    "mv": "",
+    "subtitle": {
+      "ja": "",
+      "ko": ""
+    }
+  },
+  {
+    "title": {
+      "ja": "満ちる月のセレナーデ ～八千年の旅～",
+      "ko": "Full Moon Serenade"
+    },
+    "artist": {
+      "ja": "コーニッシュ",
+      "ko": "코니시"
+    },
+    "musicFile": "music/Full Moon Serenade.mp3",
+    "coverImage": "cover/orig.jpg",
+    "default": false,
+    "default_bg": 17,
+    "mv": "",
+    "subtitle": {
+      "ja": "",
+      "ko": ""
+    }
+  },
+  {
+    "title": {
+      "ja": "超かぐや姫！",
+      "ko": "Cosmic Princess Kaguya!"
+    },
+    "artist": {
+      "ja": "コーニッシュ",
+      "ko": "코니시"
+    },
+    "musicFile": "music/超かぐや姫！.mp3",
+    "coverImage": "cover/orig.jpg",
+    "default": false,
+    "default_bg": 17,
+    "mv": "",
+    "subtitle": {
+      "ja": "",
+      "ko": ""
+    }
+  }
+]

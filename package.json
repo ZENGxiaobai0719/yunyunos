@@ -1,0 +1,15 @@
+{
+  "name": "yunyun-monorepo",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n desktop,anime,resume,shortlink -c cyan,green,yellow,magenta \"pnpm --filter @yunyun/desktop dev\" \"pnpm --filter @yunyun/anime dev\" \"pnpm --filter @yunyun/resume dev\" \"pnpm --filter @yunyun/shortlink-ui dev\"",
+    "build": "pnpm -r build",
+    "dev:desktop": "pnpm --filter @yunyun/desktop dev",
+    "dev:anime": "pnpm --filter @yunyun/anime dev",
+    "dev:resume": "pnpm --filter @yunyun/resume dev",
+    "dev:shortlink": "pnpm --filter @yunyun/shortlink-ui dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Princess Kaguya</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div id="app-wrapper">
+        <div id="bg-layer-1" class="bg-layer active"></div>
+        <div id="bg-layer-2" class="bg-layer"></div>
+        <div id="local-video-container">
+            <video id="local-video" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none; transition: opacity 0.4s; opacity: 0;" muted playsinline></video>
+        </div>
+        <div class="bg-overlay"></div>
+
+        <main class="container">
+            <div class="top-row">
+                <section class="player-widget glass">
+                    <div id="player-inner-content" style="display: flex; flex-direction: column; gap: 2vh; width: 100%; transition: opacity 0.3s ease;">
+                        <div class="cover-wrapper" id="cover-wrapper">
+                            <div class="cover-blur" id="cover-blur"></div>
+                            <img id="cover-img" src="" alt="Album Cover">
+                        </div>
+                        <div class="track-info">
+                            <h1 id="track-title" class="thin-font">Loading...</h1>
+                            <h2 id="track-artist" class="thin-font"></h2>
+                        </div>
+                        
+                        <div class="progress-area">
+                            <div class="progress-container" id="progress-container">
+                                <div class="progress-bar" id="progress-bar"></div>
+                                <div class="progress-thumb" id="progress-thumb"></div>
+                            </div>
+                            <div class="time-info thin-font">
+                                <span id="current-time">01:68</span>
+                                <span id="total-time">21:00</span>
+                            </div>
+                        </div>
+
+                        <div class="controls">
+                            <button id="btn-shuffle" class="control-btn"><i class="fas fa-random"></i></button>
+                            <button id="btn-prev" class="control-btn"><i class="fas fa-step-backward"></i></button>
+                            <button id="btn-play" class="control-btn play-btn"><i class="fas fa-play"></i></button>
+                            <button id="btn-next" class="control-btn"><i class="fas fa-step-forward"></i></button>
+                            <button id="btn-repeat" class="control-btn"><i class="fas fa-redo"></i></button>
+                        </div>
+
+                        <div class="volume-container">
+                            <i id="mute-icon" class="fas fa-volume-up control-btn" style="font-size: 1.8vh; width: 3vh; height: 3vh; display: flex; justify-content: center; align-items: center; margin-right: 1.5vh;"></i>
+                            <div class="progress-container" id="volume-progress-container" style="margin-bottom: 0; flex-grow: 1;">
+                                <div class="progress-bar" id="volume-bar" style="width: 100%;"></div>
+                                <div class="progress-thumb" id="volume-thumb" style="left: 100%;"></div>
+                            </div>
+                        </div>
+                        <audio id="audio-player"></audio>
+                    </div>
+                </section>
+
+                <section class="playlist-widget glass" id="playlist-widget">
+                    <div class="playlist-header thin-font">
+                        <div style="display: flex; align-items: center; gap: 1vh;">
+                            <input type="checkbox" id="pl-select-all" class="pl-checkbox" title="Select All">
+                            <span>Playlist</span>
+                        </div>
+                        <div class="pl-lang-controls" style="display: flex; gap: 0.5vh;">
+                            <button id="pl-lang-ja" class="sub-btn active">JA</button>
+                            <button id="pl-lang-ko" class="sub-btn">KO</button>
+                        </div>
+                    </div>
+                    <div class="playlist-items" id="playlist-items"></div>
+                    <div class="playlist-footer thin-font">
+                        <span>Total Selected Time</span>
+                        <span id="playlist-total-time">21:00</span>
+                    </div>
+                </section>
+            </div>
+
+            <div class="bottom-row" style="position: relative; display: flex; align-items: flex-end; gap: 3vh; width: 100%;">
+                <section class="clock-widget glass settings-container">
+                    <div id="player-fold-btn" class="active" style="position: absolute; top: 1.5vh; left: 1.5vh; font-size: 1.8vh; cursor: pointer; color: rgba(255,255,255,0.7); z-index: 10; transition: color 0.2s;">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    
+                    <div id="settings-btn" class="settings-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+
+                    <div id="subtitle-btn" class="subtitle-icon active">
+                        <i class="fas fa-closed-captioning"></i>
+                    </div>
+                    <div id="time-display" class="thin-font time-text">800:01:68</div>
+                    <div id="date-display" class="thin-font date-text">2030. 09. 12. THU</div>
+                </section>
+
+                <section id="subtitle-widget" class="glass show" data-sub-state="0">
+                    <div class="sub-controls sub-controls-left">
+                        <button class="sub-btn" data-side="left" data-lang="ja">JA</button>
+                        <button class="sub-btn" data-side="left" data-lang="ko">KO</button>
+                    </div>
+                    <div class="sub-controls sub-controls-right">
+                        <button class="sub-btn" data-side="right" data-lang="ja">JA</button>
+                        <button class="sub-btn" data-side="right" data-lang="ko">KO</button>
+                    </div>
+
+                    <div id="subtitle-layout">
+                        <div id="sub-side-left" class="sub-side">
+                            <div id="subtitle-container-left" class="sub-text-container">
+                                <div class="current-sub thin-font"></div>
+                                <div class="next-sub thin-font"></div>
+                            </div>
+                        </div>
+                        <div id="sub-divider"></div>
+                        <div id="sub-side-right" class="sub-side" style="display: none;">
+                            <div id="subtitle-container-right" class="sub-text-container">
+                                <div class="current-sub thin-font"></div>
+                                <div class="next-sub thin-font"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="settings-widget" class="glass settings-panel">
+                    <div class="settings-column">
+                        <div class="thin-font settings-title">Background</div>
+                        <label class="settings-label">
+                            <input type="radio" name="bg-mode" value="song_mv_full"> MV (Full Screen)
+                        </label>
+                        <label class="settings-label">
+                            <input type="radio" name="bg-mode" value="song_mv_small"> MV (Small Window)
+                        </label>
+                        <label class="settings-label">
+                            <input type="radio" name="bg-mode" value="image" checked> Image
+                        </label>
+                        <div style="border-top: 1px solid rgba(var(--text-color-rgb),0.1); margin-top: 0.5vh; padding-top: 0.8vh;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1.5vh; margin-bottom: 0.5vh;">
+                                <span class="thin-font" style="font-size: 1.4vh; color: rgba(var(--text-color-rgb),0.8);">BG Size</span>
+                                <div style="display: flex; align-items: center; gap: 0.5vh;">
+                                    <button id="bg-size-down" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-minus"></i></button>
+                                    <span id="bg-size-display" class="thin-font" style="font-size: 1.4vh; width: 5vh; text-align: center;">1.00X</span>
+                                    <button id="bg-size-up" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1.5vh; margin-bottom: 0.5vh;">
+                                <span class="thin-font" style="font-size: 1.4vh; color: rgba(var(--text-color-rgb),0.8);">BG X-Offset</span>
+                                <div style="display: flex; align-items: center; gap: 0.5vh;">
+                                    <button id="bg-x-down" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-arrow-left"></i></button>
+                                    <span id="bg-x-display" class="thin-font" style="font-size: 1.4vh; width: 5vh; text-align: center;">0</span>
+                                    <button id="bg-x-up" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-arrow-right"></i></button>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1.5vh;">
+                                <span class="thin-font" style="font-size: 1.4vh; color: rgba(var(--text-color-rgb),0.8);">BG Y-Offset</span>
+                                <div style="display: flex; align-items: center; gap: 0.5vh;">
+                                    <button id="bg-y-down" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-arrow-down"></i></button>
+                                    <span id="bg-y-display" class="thin-font" style="font-size: 1.4vh; width: 5vh; text-align: center;">0</span>
+                                    <button id="bg-y-up" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-arrow-up"></i></button>
+                                </div>
+                            </div>
+                            <div style="margin-top: 1.5vh; display: flex; justify-content: flex-start; width: 100%;">
+                                <label class="settings-label" style="font-size: 1.3vh; cursor: pointer; display: flex; align-items: center; gap: 1vh;">
+                                    <input type="checkbox" id="chk-bg-mouse-anim"> BG Mouse Animation
+                                </label>
+                            </div>
+                        </div>
+                        <div style="border-top: 1px solid rgba(var(--text-color-rgb),0.1); margin-top: 0.8vh; padding-top: 0.8vh;">
+                            <div class="thin-font" style="font-size: 1.3vh; color: rgba(var(--text-color-rgb),0.5); margin-bottom: 0.6vh; letter-spacing: 0.05em;">FILTER</div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1.5vh; margin-bottom: 0.4vh;">
+                                <span class="thin-font" style="font-size: 1.4vh; color: rgba(var(--text-color-rgb),0.8);">Brightness</span>
+                                <div style="display: flex; align-items: center; gap: 0.5vh;">
+                                    <button id="bg-brightness-down" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-minus"></i></button>
+                                    <span id="bg-brightness-display" class="thin-font" style="font-size: 1.4vh; width: 3vh; text-align: center;">55</span>
+                                    <button id="bg-brightness-up" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1.5vh; margin-bottom: 0.4vh;">
+                                <span class="thin-font" style="font-size: 1.4vh; color: rgba(var(--text-color-rgb),0.8);">Saturation</span>
+                                <div style="display: flex; align-items: center; gap: 0.5vh;">
+                                    <button id="bg-saturation-down" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-minus"></i></button>
+                                    <span id="bg-saturation-display" class="thin-font" style="font-size: 1.4vh; width: 3vh; text-align: center;">55</span>
+                                    <button id="bg-saturation-up" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1.5vh; margin-bottom: 0.4vh;">
+                                <span class="thin-font" style="font-size: 1.4vh; color: rgba(var(--text-color-rgb),0.8);">Contrast</span>
+                                <div style="display: flex; align-items: center; gap: 0.5vh;">
+                                    <button id="bg-contrast-down" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-minus"></i></button>
+                                    <span id="bg-contrast-display" class="thin-font" style="font-size: 1.4vh; width: 3vh; text-align: center;">50</span>
+                                    <button id="bg-contrast-up" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1.5vh;">
+                                <span class="thin-font" style="font-size: 1.4vh; color: rgba(var(--text-color-rgb),0.8);">Blur</span>
+                                <div style="display: flex; align-items: center; gap: 0.5vh;">
+                                    <button id="bg-blur-down" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-minus"></i></button>
+                                    <span id="bg-blur-display" class="thin-font" style="font-size: 1.4vh; width: 3vh; text-align: center;">0</span>
+                                    <button id="bg-blur-up" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="image-nav-container" class="settings-column settings-divider" style="display: flex; min-width: 18vh; max-width: 18vh;">
+                        <div class="thin-font settings-title">Select BG Image</div>
+                        
+                        <div id="bg-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1vh; margin-top: 1vh; width: 100%;">
+                            </div>
+
+                        <div style="display: flex; justify-content: space-between; gap: 1vh; margin-top: 1vh; width: 100%;">
+                            <button id="bg-grid-up-btn" class="control-btn glass" style="flex: 1; height: 3vh; border-radius: 0.5vh; font-size: 1.5vh; cursor: pointer;"><i class="fas fa-chevron-up"></i></button>
+                            <button id="bg-grid-down-btn" class="control-btn glass" style="flex: 1; height: 3vh; border-radius: 0.5vh; font-size: 1.5vh; cursor: pointer;"><i class="fas fa-chevron-down"></i></button>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; gap: 1vh; margin-top: 1vh; width: 100%;">
+                            <button id="bg-grid-double-up-btn" class="control-btn glass" style="flex: 1; height: 3vh; border-radius: 0.5vh; font-size: 1.5vh; cursor: pointer;"><i class="fas fa-angles-up"></i></button>
+                            <button id="bg-grid-double-down-btn" class="control-btn glass" style="flex: 1; height: 3vh; border-radius: 0.5vh; font-size: 1.5vh; cursor: pointer;"><i class="fas fa-angles-down"></i></button>
+                        </div>
+
+                        <div id="default-bg-action-container" style="margin-top: 1vh; display: flex; justify-content: flex-start; width: 100%;">
+                            <label class="settings-label" style="font-size: 1.3vh; cursor: pointer; display: flex; align-items: center; gap: 1vh;">
+                                <input type="checkbox" id="chk-use-default-bg" checked> Use Song's Default
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-column settings-divider">
+                        <div class="thin-font settings-title">Layout</div>
+                        <label class="settings-label" style="font-size: 1.4vh;">
+                            <input type="checkbox" id="chk-show-furigana" checked>
+                            Show Ruby
+                        </label>
+                        <label class="settings-label" style="font-size: 1.4vh;">
+                            <input type="checkbox" id="mirror-layout-checkbox">
+                            Mirror Layout
+                        </label>
+                        <label class="settings-label" style="font-size: 1.4vh;">
+                            <input type="checkbox" id="center-y-checkbox">
+                            Center Vertically
+                        </label>
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 1.5vh;">
+                            <span class="thin-font" style="font-size: 1.4vh; color: rgba(var(--text-color-rgb),0.8);">Layout X-Offset</span>
+                            <div style="display: flex; align-items: center; gap: 0.5vh;">
+                                <button id="layout-x-down" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-arrow-left"></i></button>
+                                <span id="layout-x-display" class="thin-font" style="font-size: 1.4vh; width: 3vh; text-align: center;">7</span>
+                                <button id="layout-x-up" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 1.5vh;">
+                            <span class="thin-font" style="font-size: 1.4vh; color: rgba(var(--text-color-rgb),0.8);">Layout Y-Offset</span>
+                            <div style="display: flex; align-items: center; gap: 0.5vh;">
+                                <button id="layout-y-down" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-arrow-down"></i></button>
+                                <span id="layout-y-display" class="thin-font" style="font-size: 1.4vh; width: 3vh; text-align: center;">7</span>
+                                <button id="layout-y-up" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-arrow-up"></i></button>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 1.5vh;">
+                            <span class="thin-font" style="font-size: 1.4vh; color: rgba(var(--text-color-rgb),0.8);">Global X-Offset</span>
+                            <div style="display: flex; align-items: center; gap: 0.5vh;">
+                                <button id="global-x-down" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-arrow-left"></i></button>
+                                <span id="global-x-display" class="thin-font" style="font-size: 1.4vh; width: 3vh; text-align: center;">0</span>
+                                <button id="global-x-up" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 1.5vh;">
+                            <span class="thin-font" style="font-size: 1.4vh; color: rgba(var(--text-color-rgb),0.8);">Global Y-Offset</span>
+                            <div style="display: flex; align-items: center; gap: 0.5vh;">
+                                <button id="global-y-down" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-arrow-down"></i></button>
+                                <span id="global-y-display" class="thin-font" style="font-size: 1.4vh; width: 3vh; text-align: center;">0</span>
+                                <button id="global-y-up" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-arrow-up"></i></button>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 1.5vh;">
+                            <span class="thin-font" style="font-size: 1.4vh; color: rgba(var(--text-color-rgb),0.8);">Small MV X-Offset</span>
+                            <div style="display: flex; align-items: center; gap: 0.5vh;">
+                                <button id="mv-x-down" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-arrow-left"></i></button>
+                                <span id="mv-x-display" class="thin-font" style="font-size: 1.4vh; width: 3vh; text-align: center;">0</span>
+                                <button id="mv-x-up" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 1.5vh;">
+                            <span class="thin-font" style="font-size: 1.4vh; color: rgba(var(--text-color-rgb),0.8);">Small MV Y-Offset</span>
+                            <div style="display: flex; align-items: center; gap: 0.5vh;">
+                                <button id="mv-y-down" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-arrow-down"></i></button>
+                                <span id="mv-y-display" class="thin-font" style="font-size: 1.4vh; width: 3vh; text-align: center;">0</span>
+                                <button id="mv-y-up" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-arrow-up"></i></button>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 1.5vh;">
+                            <span class="thin-font" style="font-size: 1.4vh; color: rgba(var(--text-color-rgb),0.8);">Small MV Size</span>
+                            <div style="display: flex; align-items: center; gap: 0.5vh;">
+                                <button id="mv-size-down" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-minus"></i></button>
+                                <span id="mv-size-display" class="thin-font" style="font-size: 1.4vh; width: 4vh; text-align: center;">1.00x</span>
+                                <button id="mv-size-up" class="control-btn" style="width: 2.5vh; height: 2.5vh; font-size: 1.2vh; background: rgba(var(--text-color-rgb),0.1); border-radius: 0.5vh;"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-column settings-divider">
+                        <div class="thin-font settings-title">Effects & Clock</div>
+                        <label class="settings-label vis-toggle" style="margin-bottom: 0.5vh;">
+                            <input type="checkbox" id="vis-toggle-checkbox">
+                            <span>Visualizer</span>
+                        </label>
+                        <label class="settings-label" style="font-size: 1.4vh;">
+                            <input type="checkbox" id="chk-clock-24h" checked>
+                            24-Hour Format
+                        </label>
+                        <label class="settings-label" style="font-size: 1.4vh;">
+                            <input type="checkbox" id="chk-clock-sec" checked>
+                            Show Seconds
+                        </label>
+                        <label class="settings-label" style="font-size: 1.4vh;">
+                            <input type="checkbox" id="chk-clock-time" checked>
+                            Show Time
+                        </label>
+                        <label class="settings-label" style="font-size: 1.4vh;">
+                            <input type="checkbox" id="chk-clock-jst">
+                            Use JST (Tokyo)
+                        </label>
+                        <label class="settings-label" style="font-size: 1.4vh;">
+                            <input type="checkbox" id="chk-clock-order" checked>
+                            Time on Top
+                        </label>
+                        <div style="flex-grow: 1; min-height: 2vh;"></div>
+                        <button id="credit-btn" class="glass thin-font" style="padding: 0.8vh; font-size: 1.4vh; cursor: pointer; color: var(--text-color); border: 1px solid rgba(var(--text-color-rgb),0.2); background: rgba(var(--text-color-rgb),0.1); width: 100%; transition: background 0.2s; margin-bottom: 0.5vh;">Credit</button>
+                        <button id="reset-settings-btn" class="glass thin-font" style="padding: 0.8vh; font-size: 1.4vh; cursor: pointer; color: var(--text-color); border: 1px solid rgba(255, 100, 100, 0.4); background: rgba(255, 100, 100, 0.1); width: 100%; transition: background 0.2s; margin-bottom: 0.5vh;">Reset Settings</button>
+                        <button id="force-save-btn" class="glass thin-font" style="padding: 0.8vh; font-size: 1.4vh; cursor: pointer; color: var(--text-color); border: 1px solid rgba(var(--text-color-rgb),0.2); background: rgba(var(--text-color-rgb),0.1); width: 100%; transition: background 0.2s;">Force Save</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <div class="visualizer-container" style="display: none;">
+            <canvas id="visualizer"></canvas>
+        </div>
+        <div id="credit-modal" class="glass">
+            <div class="credit-header thin-font">
+                <h2>Credits</h2>
+                <button id="close-credit-btn" class="control-btn" style="width: 3vh; height: 3vh; font-size: 2vh;"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="credit-content thin-font">
+                <div class="credit-section">
+                    <h3>Songs & Most MVs</h3>
+                    <div class="credit-item">
+                        <span>『超かぐや姫 ! 』公式</span>
+                        <div class="credit-links">
+                            <i class="fab fa-youtube credit-icon" data-link="https://www.youtube.com/channel/UCNrdR2m8fxDBNbxJDBFPFNQ"></i>
+                            <i class="fa-brands fa-x-twitter credit-icon" data-link="https://x.com/Cho_KaguyaHime"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="credit-section">
+                    <h3>Melt MV</h3>
+                    <div class="credit-item">
+                        <span>ryo (supercell)</span>
+                        <div class="credit-links">
+                            <i class="fab fa-youtube credit-icon" data-link="https://www.youtube.com/@spclryo2673"></i>
+                            <i class="fa-brands fa-x-twitter credit-icon" data-link="https://x.com/ryo_spcl"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="credit-section">
+                    <h3>ray MV</h3>
+                    <div class="credit-item">
+                        <span>あきねこ</span>
+                        <div class="credit-links">
+                            <i class="fab fa-youtube credit-icon" data-link="https://www.youtube.com/@Akineko_01"></i>
+                            <i class="fa-brands fa-x-twitter credit-icon" data-link="https://x.com/AKINeCO916"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="credit-section">
+                    <h3>Special Thanks</h3>
+                    <div class="credit-item">
+                        <span>Korean CPK! Community</span>
+                        <div class="credit-links">
+                            <i class="fas fa-globe credit-icon" data-link="https://gall.dcinside.com/mgallery/board/lists/?id=chokaguyahime"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="credit-section">
+                    <h3>Created by</h3>
+                    <div class="credit-item"><span>DACCHI</span></div>
+                </div>
+                    <div style="font-size: 1.2vh; color: rgba(var(--text-color-rgb), 0.5); text-align: center; margin-top: 1.5vh; padding-top: 1.5vh; border-top: 1px solid rgba(var(--text-color-rgb), 0.1); line-height: 1.5; letter-spacing: 0.02em;">
+                    Korean Translation Reference: 레무0_0, kairan<br>
+                    This wallpaper is created for non-commercial, fan-made purposes only.<br>
+                    All copyrights to the music, videos, and original works belong to their respective creators.
+                </div>
+            </div>
+        </div>
+        </div> <div id="credit-toast" class="thin-font">✔ Copied!</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
