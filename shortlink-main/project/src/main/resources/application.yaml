@@ -6,7 +6,7 @@ spring:
     name: short-link-project
   datasource:
     driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
-    url: jdbc:shardingsphere:classpath:shardingsphere-config-${database.env:dev}.yaml
+    url: jdbc:shardingsphere:classpath:shardingsphere-config-${database.env:prod}.yaml
   data:
     redis:
       host: 127.0.0.1
@@ -22,7 +22,7 @@ spring:
 
 short-link:
   domain:
-    default: localhost:8001
+    default: bian.asia
   stats:
     locale:
       amap-key: 824c511f0997586ea016f979fdb23087

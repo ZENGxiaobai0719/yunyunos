@@ -6,7 +6,7 @@ spring:
     name: short-link-aggregation
   datasource:
     driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
-    url: jdbc:shardingsphere:classpath:shardingsphere-config-${database.env:dev}.yaml
+    url: jdbc:shardingsphere:classpath:shardingsphere-config-${database.env:prod}.yaml
   data:
     redis:
       host: 127.0.0.1
@@ -21,7 +21,7 @@ spring:
         server-addr: 127.0.0.1:8848
 
 aggregation:
-  remote-url: http://127.0.0.1:${server.port}
+  remote-url: http://bian.asia
 
 short-link:
   group:
@@ -31,7 +31,7 @@ short-link:
     time-window: 1
     max-access-count: 20
   domain:
-    default: localhost:8003
+    default: bian.asia
   demo-mode:
     enable: false
     blacklist:
