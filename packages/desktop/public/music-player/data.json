@@ -8,8 +8,8 @@
       "ja": "yuigot & 月見ヤチヨ",
       "ko": "yuigot & 루나미 야치요"
     },
-    "musicFile": "music/Remember.flac",
-    "coverImage": "cover/Remember.png",
+    "musicFile": "music/Remember.mp3",
+    "coverImage": "cover/Remember.webp",
     "default": true,
     "default_bg": 2,
     "mv": "mv/Remember.webm",
@@ -27,8 +27,8 @@
       "ja": "Aqu3ra & 月見ヤチヨ",
       "ko": "Aqu3ra & 루나미 야치요"
     },
-    "musicFile": "music/星降る海.flac",
-    "coverImage": "cover/星降る海.png",
+    "musicFile": "music/星降る海.mp3",
+    "coverImage": "cover/星降る海.webp",
     "default": true,
     "default_bg": 3,
     "mv": "mv/星降る海.webm",
@@ -46,8 +46,8 @@
       "ja": "Honeyworks & かぐや",
       "ko": "Honeyworks & 카구야"
     },
-    "musicFile": "music/私は、わたしの事が好き.flac",
-    "coverImage": "cover/私は、わたしの事が好き.png",
+    "musicFile": "music/私は、わたしの事が好き.mp3",
+    "coverImage": "cover/私は、わたしの事が好き.webp",
     "default": true,
     "default_bg": 4,
     "mv": "mv/私は、わたしの事が好き.webm",
@@ -65,8 +65,8 @@
       "ja": "yuigot & かぐや",
       "ko": "yuigot & 카구야"
     },
-    "musicFile": "music/ハッピーシンセサイザ.flac",
-    "coverImage": "cover/ハッピーシンセサイザ.png",
+    "musicFile": "music/ハッピーシンセサイザ.mp3",
+    "coverImage": "cover/ハッピーシンセサイザ.webp",
     "default": true,
     "default_bg": 5,
     "mv": "mv/ハッピーシンセサイザ.webm",
@@ -84,8 +84,8 @@
       "ja": "ryo (supercell) & かぐや & 月見ヤチヨ",
       "ko": "ryo (supercell) & 카구야 & 루나미 야치요"
     },
-    "musicFile": "music/ワールドイズマイン.flac",
-    "coverImage": "cover/ワールドイズマイン.png",
+    "musicFile": "music/ワールドイズマイン.mp3",
+    "coverImage": "cover/ワールドイズマイン.webp",
     "default": true,
     "default_bg": 6,
     "mv": "mv/ワールドイズマイン.webm",
@@ -103,8 +103,8 @@
       "ja": "ryo (supercell) & かぐや & 月見ヤチヨ",
       "ko": "ryo (supercell) & 카구야 & 루나미 야치요"
     },
-    "musicFile": "music/Ex-Otogibanashi.flac",
-    "coverImage": "cover/Ex-Otogibanashi.png",
+    "musicFile": "music/Ex-Otogibanashi.mp3",
+    "coverImage": "cover/Ex-Otogibanashi.webp",
     "default": true,
     "default_bg": 7,
     "mv": "mv/Ex-Otogibanashi.webm",
@@ -122,8 +122,8 @@
       "ja": "40mP & かぐや",
       "ko": "40mP & 카구야"
     },
-    "musicFile": "music/瞬間、シンフォニー.flac",
-    "coverImage": "cover/瞬間、シンフォニー.png",
+    "musicFile": "music/瞬間、シンフォニー.mp3",
+    "coverImage": "cover/瞬間、シンフォニー.webp",
     "default": true,
     "default_bg": 8,
     "mv": "mv/瞬間、シンフォニー.webm",
@@ -141,8 +141,8 @@
       "ja": "kz & かぐや",
       "ko": "kz & 카구야"
     },
-    "musicFile": "music/Reply.flac",
-    "coverImage": "cover/Reply.png",
+    "musicFile": "music/Reply.mp3",
+    "coverImage": "cover/Reply.webp",
     "default": true,
     "default_bg": 9,
     "mv": "mv/Reply.webm",
@@ -160,8 +160,8 @@
       "ja": "かぐや & 月見ヤチヨ",
       "ko": "카구야 & 루나미 야치요"
     },
-    "musicFile": "music/ray.flac",
-    "coverImage": "cover/ray.png",
+    "musicFile": "music/ray.mp3",
+    "coverImage": "cover/ray.webp",
     "default": true,
     "default_bg": 10,
     "mv": "mv/ray.webm",
@@ -179,8 +179,8 @@
       "ja": "ryo (supercell) & かぐや",
       "ko": "ryo (supercell) & 카구야"
     },
-    "musicFile": "music/melt.flac",
-    "coverImage": "cover/melt.png",
+    "musicFile": "music/melt.mp3",
+    "coverImage": "cover/melt.webp",
     "default": true,
     "default_bg": 11,
     "mv": "mv/melt.webm",
@@ -199,7 +199,7 @@
       "ko": "ryo (supercell) & 루나미 야치요"
     },
     "musicFile": "music/Ex-Otogibanashi_ya.mp3",
-    "coverImage": "cover/Ex-Otogibanashi.png",
+    "coverImage": "cover/Ex-Otogibanashi.webp",
     "default": true,
     "default_bg": 7,
     "mv": "mv/Ex-Otogibanashi.webm",
@@ -218,7 +218,7 @@
       "ko": "Aqu3ra & 루나미 야치요"
     },
     "musicFile": "music/ロンリーユニバース.mp3",
-    "coverImage": "cover/ロンリーユニバース.png",
+    "coverImage": "cover/ロンリーユニバース.webp",
     "default": true,
     "default_bg": 12,
     "mv": "mv/ロンリーユニバース.webm",
@@ -237,7 +237,7 @@
       "ko": "Honeyworks & 카구야"
     },
     "musicFile": "music/竹取オーバーナイトセンセーション.mp3",
-    "coverImage": "cover/竹取オーバーナイトセンセーション.png",
+    "coverImage": "cover/竹取オーバーナイトセンセーション.webp",
     "default": true,
     "default_bg": 13,
     "mv": "mv/竹取オーバーナイトセンセーション.webm",
@@ -256,7 +256,7 @@
       "ko": "40mp & 루나미 야치요"
     },
     "musicFile": "music/トリノコシティ.mp3",
-    "coverImage": "cover/トリノコシティ.png",
+    "coverImage": "cover/トリノコシティ.webp",
     "default": true,
     "default_bg": 14,
     "mv": "mv/トリノコシティ.webm",
@@ -275,7 +275,7 @@
       "ko": "yuigot & 카구야"
     },
     "musicFile": "music/夢をみる島.mp3",
-    "coverImage": "cover/夢をみる島.png",
+    "coverImage": "cover/夢をみる島.webp",
     "default": true,
     "default_bg": 15,
     "mv": "mv/夢をみる島.webm",
@@ -294,7 +294,7 @@
       "ko": "kz & 루나미 야치요"
     },
     "musicFile": "music/Tell Your World.mp3",
-    "coverImage": "cover/Tell Your World.png",
+    "coverImage": "cover/Tell Your World.webp",
     "default": true,
     "default_bg": 16,
     "mv": "mv/Tell Your World.webm",
